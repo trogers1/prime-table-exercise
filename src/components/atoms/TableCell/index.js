@@ -1,16 +1,25 @@
+import React from 'react';
 import styled from 'styled-components';
 
-const TableCell = styled.td`
-  border: 1px;
-  background: ${props => (props.isHeader ? 'blue' : 'red')};
-  color: ${props => (props.isHeader ? 'red' : 'blue')};
+const CellDiv = styled.div`
+  padding: 0.5rem;
+  background: ${props => (props.isHeader ? '#0ba3ba' : '#c9c9c9')};
+  color: ${props => (props.isHeader ? '#c9c9c9' : '#0ba3ba')};
   ${props => props.isHeader && 'font-weight: bold'};
+  display: flex;
+  justify-content: center;
 `;
 
-export const TableHeaderCell = styled.th`
-  border: 1px;
-  background: ${props => (props.isHeader ? 'blue' : 'red')};
-  color: ${props => (props.isHeader ? 'red' : 'blue')};
-`;
+const TableCell = ({ children, ...props }) => (
+  <td>
+    <CellDiv {...props}>{children}</CellDiv>
+  </td>
+);
+
+export const TableHeaderCell = ({ children, ...props }) => (
+  <th>
+    <CellDiv {...props}>{children}</CellDiv>
+  </th>
+);
 
 export default TableCell;
