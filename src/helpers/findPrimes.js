@@ -9,7 +9,6 @@ module.exports = numPrimes => {
   if (!Number.isInteger(Number(numPrimes))) {
     throw new Error(`'${numPrimes}' is not an integer. Please provide only an integer.`);
   }
-  console.log(`Generating ${numPrimes} primes...`);
   let primeArray = [];
   // This is the implementation of the Incremental Sieve of Eratosthenes
   let currNumber = 3;
@@ -41,6 +40,5 @@ module.exports = numPrimes => {
       }
     }
   }
-  console.log('prime array', primeArray);
   return primeArray;
 };
