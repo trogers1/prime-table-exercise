@@ -4,7 +4,7 @@
  * @param   {number}    numPrimes   The number of primes found
  * @returns An array of booleans, any `true` value's index is a prime number.
  */
-module.exports = numPrimes => {
+module.exports = (numPrimes, print = false) => {
   // Check type of numPrimes
   if (!Number.isInteger(Number(numPrimes))) {
     throw new Error(`'${numPrimes}' is not an integer. Please provide only an integer.`);
@@ -39,6 +39,9 @@ module.exports = numPrimes => {
         primeArray.push(currNumber);
       }
     }
+  }
+  if (print) {
+    console.log(primeArray);
   }
   return primeArray;
 };
