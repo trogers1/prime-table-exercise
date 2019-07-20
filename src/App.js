@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import findPrimes from './helpers/findPrimes';
 import styled from 'styled-components';
 
@@ -9,45 +9,36 @@ const ErrorMessage = styled.div`
   font-size: 0.8rem;
 `;
 
-class App extends React.Component {
-  state = {
-    error: '',
-    inputVal: '',
-    isLoading: false,
-    primeNumbers: null
-  };
-  async componentDidUpdate(prevProps, prevState) {
-    console.log(this.state, prevState);
+function App() {
+  const [error, setError] = useState('');
+  const [inputValue, setInputValue] = useState('');
+  const [isLoading, setLoading] = useState(false);
+  const [primeNumbers, setPrimeNumbers] = useState(null);
+  useEffect(() => {
     let result;
-    if (this.state.inputVal !== prevState.inputVal) {
-      try {
-        if (this.state.inputVal !== '') {
-          this.setState({ error: '', isLoading: true });
-          result = await findPrimes(this.state.inputVal);
-        }
-        this.setState({ primeNumbers: result });
-      } catch (error) {
-        this.setState({ error: error.message });
-        return;
+    try {
+      if (inputValue !== '') {
+        setError('');
+        setLoading(true);
+        result = findPrimes(inputValue);
       }
+      setPrimeNumbers(result);
+    } catch (err) {
+      setError(err.message);
+      return;
     }
-    console.log(result);
-  }
-  render() {
-    console.log('app state', this.state);
-    const { primeNumbers } = this.state;
-    return (
-      <>
-        <input
-          onChange={event => this.setState({ inputVal: event.target.value })}
-          placeholder="Enter an integer"
-          max="20000"
-        />
-        {this.state.error && <ErrorMessage>{this.state.error}</ErrorMessage>}
-        {primeNumbers && <Table primeNumbers={primeNumbers} />}
-      </>
-    );
-  }
+  }, [inputValue]);
+  return (
+    <>
+      <input
+        onChange={event => setInputValue(event.target.value)}
+        placeholder="Enter an integer"
+        max="20000"
+      />
+      {error && <ErrorMessage>{error}</ErrorMessage>}
+      {primeNumbers && <Table primeNumbers={primeNumbers} />}
+    </>
+  );
 }
 
 export default App;
