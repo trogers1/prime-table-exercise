@@ -2,7 +2,7 @@ import React from 'react';
 import findPrimes from './helpers/findPrimes';
 import styled from 'styled-components';
 
-import Table from './components/table';
+import Table from './components/organisms/Table';
 
 const ErrorMessage = styled.div`
   color: red;
