@@ -1,23 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledTable = styled.table`
-  background: blue;
-  font-color: red;
-`;
+import TableCell, { TableHeaderCell } from '../../atoms/TableCell';
+import TableRow from '../../molecules/TableRow';
 
-const Row = styled.tr`
-  font-size: 0.6rem;
+const StyledTable = styled.table`
+  border: 2px black;
+  border-radius: 3px;
 `;
 
 const Table = ({ primeNumbers }) => {
   return (
     <StyledTable>
       <thead>
-        {primeNumbers.map((prime, index) => (
-          <td key={`header-${index}`}>{prime}</td>
-        ))}
+        <tr>
+          <TableHeaderCell isHeader />
+          {primeNumbers.map((prime, index) => (
+            <TableHeaderCell isHeader key={`header-${index}`}>
+              {prime}
+            </TableHeaderCell>
+          ))}
+        </tr>
       </thead>
+      {primeNumbers.length && (
+        <tbody>
+          {primeNumbers.map((val, index) => (
+            <TableRow currentNumber={val} primeNumbers={primeNumbers} key={`Row.${val}.${index}`} />
+          ))}
+        </tbody>
+      )}
     </StyledTable>
   );
 };
