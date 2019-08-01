@@ -24,14 +24,14 @@ module.exports = (numPrimes, print = false) => {
       let limit = Math.ceil(Math.sqrt(currNumber));
       let isPrime = true;
       for (let prime of primeArray) {
-        let testNumber = prime;
+        let primeMultiple = prime;
         if (prime > limit) {
           break;
         }
-        while (testNumber < currNumber) {
-          testNumber += prime;
+        while (primeMultiple < currNumber) {
+          primeMultiple += prime;
         }
-        if (testNumber === currNumber) {
+        if (primeMultiple === currNumber) {
           isPrime = false;
         }
       }
